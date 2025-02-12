@@ -13,16 +13,16 @@ const Navbar = () => {
       <div className='p-2 m-2 w-3/6 text-2xl cursor-pointer'>
         <ul className='flex justify-between'>
           <NavLink to='/'>
-            <li className='p-2 m-2 hover:underline hover:text-gray-700 hover:text-[25px] hover:font-bold duration-300 ease-in'>HOME</li>
+            <li className='p-2 m-2 hover:underline hover:text-primary hover:text-[25px] hover:font-bold duration-300 ease-in'>HOME</li>
             </NavLink>
             <NavLink to='/mentors'>
-            <li className='p-2 m-2 hover:underline hover:text-gray-600 hover:text-[25px] hover:font-bold duration-300 ease-in'>ALL MENTOR</li>
+            <li className='p-2 m-2 hover:underline hover:text-primary hover:text-[25px] hover:font-bold duration-300 ease-in'>ALL MENTOR</li>
             </NavLink>
             <NavLink to='/about'>
-            <li className='p-2 m-2 hover:underline hover:text-gray-600  hover:text-[25px] hover:font-bold duration-300 ease-in'>ABOUT</li>
+            <li className='p-2 m-2 hover:underline hover:text-primary  hover:text-[25px] hover:font-bold duration-300 ease-in'>ABOUT</li>
             </NavLink>
             <NavLink to='/contact'>
-            <li className='p-2 m-2 hover:underline hover:text-gray-600  hover:text-[25px] hover:font-bold duration-300 ease-in'>CONTACT</li>
+            <li className='p-2 m-2 hover:underline hover:text-primary  hover:text-[25px] hover:font-bold duration-300 ease-in'>CONTACT</li>
             </NavLink>
         </ul>
       </div>
