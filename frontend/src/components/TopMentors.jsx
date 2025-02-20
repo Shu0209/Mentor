@@ -27,7 +27,7 @@ return(
     ))}
 </div>
 <div className="flex justify-center">
-<button onClick={()=>navigate(`/Mentors`)} className="font-bold text-2xl m-2 p-2  bg-primary text-white w-[120px] h-[50px] rounded-4xl hover:w-[140px] hover:h-[65px] hover:text-3xl duration-500">More</button>
+<button onClick={()=>navigate(`/Mentors`)} className="font-bold text-2xl m-2 p-2  bg-gray-200 text-black w-[120px] h-[50px] rounded-4xl hover:w-[140px] hover:h-[65px] hover:text-3xl duration-500">More</button>
 </div>
     </div>
    
