@@ -31,12 +31,8 @@ import doc12 from './doc12.png'
 import doc13 from './doc13.png'
 import doc14 from './doc14.png'
 import doc15 from './doc15.png'
-import Dermatologist from './Dermatologist.svg'
-import Gastroenterologist from './Gastroenterologist.svg'
-import General_physician from './General_physician.svg'
-import Gynecologist from './Gynecologist.svg'
-import Neurologist from './Neurologist.svg'
-import Pediatricians from './Pediatricians.svg'
+
+
 import dataScience from './dataScience.png'
 import spring from './spring.png'
 import cyberSecurity from './cyberSecurity.jpg'
@@ -95,11 +91,11 @@ export const specialityData = [
 
 export const mentors = [
     {
-        _id: 'doc1',
+        _id: 'men1',
         name: 'Dr. Richard James',
         image: doc1,
-        speciality: 'General physician',
-        degree: 'MBBS',
+        speciality: 'Data Science',
+        degree: 'B Tech.',
         experience: '4 Years',
         about: 'Dr. Davis has a strong commitment to delivering comprehensive medical care, focusing on preventive medicine, early diagnosis, and effective treatment strategies. Dr. Davis has a strong commitment to delivering comprehensive medical care, focusing on preventive medicine, early diagnosis, and effective treatment strategies.',
         fees: 50,
@@ -109,11 +105,11 @@ export const mentors = [
         }
     },
     {
-        _id: 'doc2',
+        _id: 'men2',
         name: 'Dr. Emily Larson',
         image: doc2,
-        speciality: 'Gynecologist',
-        degree: 'MBBS',
+        speciality: 'Spring Boot',
+        degree: 'B Tech.',
         experience: '3 Years',
         about: 'Dr. Davis has a strong commitment to delivering comprehensive medical care, focusing on preventive medicine, early diagnosis, and effective treatment strategies. Dr. Davis has a strong commitment to delivering comprehensive medical care, focusing on preventive medicine, early diagnosis, and effective treatment strategies.',
         fees: 60,
@@ -123,11 +119,11 @@ export const mentors = [
         }
     },
     {
-        _id: 'doc3',
+        _id: 'men3',
         name: 'Dr. Sarah Patel',
         image: doc3,
-        speciality: 'Dermatologist',
-        degree: 'MBBS',
+        speciality: 'Machine Learning',
+        degree: 'B Tech.',
         experience: '1 Years',
         about: 'Dr. Davis has a strong commitment to delivering comprehensive medical care, focusing on preventive medicine, early diagnosis, and effective treatment strategies. Dr. Davis has a strong commitment to delivering comprehensive medical care, focusing on preventive medicine, early diagnosis, and effective treatment strategies.',
         fees: 30,
@@ -137,11 +133,11 @@ export const mentors = [
         }
     },
     {
-        _id: 'doc4',
+        _id: 'men4',
         name: 'Dr. Christopher Lee',
         image: doc4,
-        speciality: 'Pediatricians',
-        degree: 'MBBS',
+        speciality: 'MERN Stack',
+        degree: 'B Tech.',
         experience: '2 Years',
         about: 'Dr. Davis has a strong commitment to delivering comprehensive medical care, focusing on preventive medicine, early diagnosis, and effective treatment strategies. Dr. Davis has a strong commitment to delivering comprehensive medical care, focusing on preventive medicine, early diagnosis, and effective treatment strategies.',
         fees: 40,
@@ -151,11 +147,11 @@ export const mentors = [
         }
     },
     {
-        _id: 'doc5',
+        _id: 'men5',
         name: 'Dr. Jennifer Garcia',
         image: doc5,
-        speciality: 'Neurologist',
-        degree: 'MBBS',
+        speciality: 'Cyber Security',
+        degree: 'B Tech.',
         experience: '4 Years',
         about: 'Dr. Davis has a strong commitment to delivering comprehensive medical care, focusing on preventive medicine, early diagnosis, and effective treatment strategies. Dr. Davis has a strong commitment to delivering comprehensive medical care, focusing on preventive medicine, early diagnosis, and effective treatment strategies.',
         fees: 50,
@@ -165,11 +161,11 @@ export const mentors = [
         }
     },
     {
-        _id: 'doc6',
+        _id: 'men6',
         name: 'Dr. Andrew Williams',
         image: doc6,
-        speciality: 'Neurologist',
-        degree: 'MBBS',
+        speciality: 'Blockchain',
+        degree: 'B Tech.',
         experience: '4 Years',
         about: 'Dr. Davis has a strong commitment to delivering comprehensive medical care, focusing on preventive medicine, early diagnosis, and effective treatment strategies. Dr. Davis has a strong commitment to delivering comprehensive medical care, focusing on preventive medicine, early diagnosis, and effective treatment strategies.',
         fees: 50,
@@ -179,11 +175,11 @@ export const mentors = [
         }
     },
     {
-        _id: 'doc7',
+        _id: 'men7',
         name: 'Dr. Christopher Davis',
         image: doc7,
-        speciality: 'General physician',
-        degree: 'MBBS',
+        speciality: 'Data Science',
+        degree: 'B Tech.',
         experience: '4 Years',
         about: 'Dr. Davis has a strong commitment to delivering comprehensive medical care, focusing on preventive medicine, early diagnosis, and effective treatment strategies. Dr. Davis has a strong commitment to delivering comprehensive medical care, focusing on preventive medicine, early diagnosis, and effective treatment strategies.',
         fees: 50,
@@ -193,11 +189,11 @@ export const mentors = [
         }
     },
     {
-        _id: 'doc8',
+        _id: 'men8',
         name: 'Dr. Timothy White',
         image: doc8,
-        speciality: 'Gynecologist',
-        degree: 'MBBS',
+        speciality: 'Spring Boot',
+        degree: 'B Tech.',
         experience: '3 Years',
         about: 'Dr. Davis has a strong commitment to delivering comprehensive medical care, focusing on preventive medicine, early diagnosis, and effective treatment strategies. Dr. Davis has a strong commitment to delivering comprehensive medical care, focusing on preventive medicine, early diagnosis, and effective treatment strategies.',
         fees: 60,
@@ -207,11 +203,11 @@ export const mentors = [
         }
     },
     {
-        _id: 'doc9',
+        _id: 'men9',
         name: 'Dr. Ava Mitchell',
         image: doc9,
-        speciality: 'Dermatologist',
-        degree: 'MBBS',
+        speciality: 'Machine Learning',
+        degree: 'B Tech.',
         experience: '1 Years',
         about: 'Dr. Davis has a strong commitment to delivering comprehensive medical care, focusing on preventive medicine, early diagnosis, and effective treatment strategies. Dr. Davis has a strong commitment to delivering comprehensive medical care, focusing on preventive medicine, early diagnosis, and effective treatment strategies.',
         fees: 30,
@@ -221,11 +217,11 @@ export const mentors = [
         }
     },
     {
-        _id: 'doc10',
+        _id: 'men10',
         name: 'Dr. Jeffrey King',
         image: doc10,
-        speciality: 'Pediatricians',
-        degree: 'MBBS',
+        speciality: 'MERN Stack',
+        degree: 'B Tech.',
         experience: '2 Years',
         about: 'Dr. Davis has a strong commitment to delivering comprehensive medical care, focusing on preventive medicine, early diagnosis, and effective treatment strategies. Dr. Davis has a strong commitment to delivering comprehensive medical care, focusing on preventive medicine, early diagnosis, and effective treatment strategies.',
         fees: 40,
@@ -235,11 +231,11 @@ export const mentors = [
         }
     },
     {
-        _id: 'doc11',
+        _id: 'men11',
         name: 'Dr. Zoe Kelly',
         image: doc11,
-        speciality: 'Neurologist',
-        degree: 'MBBS',
+        speciality: 'Cyber Security',
+        degree: 'B Tech.',
         experience: '4 Years',
         about: 'Dr. Davis has a strong commitment to delivering comprehensive medical care, focusing on preventive medicine, early diagnosis, and effective treatment strategies. Dr. Davis has a strong commitment to delivering comprehensive medical care, focusing on preventive medicine, early diagnosis, and effective treatment strategies.',
         fees: 50,
@@ -249,11 +245,11 @@ export const mentors = [
         }
     },
     {
-        _id: 'doc12',
+        _id: 'men12',
         name: 'Dr. Patrick Harris',
         image: doc12,
-        speciality: 'Neurologist',
-        degree: 'MBBS',
+        speciality: 'Cyber Security',
+        degree: 'B Tech.',
         experience: '4 Years',
         about: 'Dr. Davis has a strong commitment to delivering comprehensive medical care, focusing on preventive medicine, early diagnosis, and effective treatment strategies. Dr. Davis has a strong commitment to delivering comprehensive medical care, focusing on preventive medicine, early diagnosis, and effective treatment strategies.',
         fees: 50,
@@ -263,11 +259,11 @@ export const mentors = [
         }
     },
     {
-        _id: 'doc13',
+        _id: 'men13',
         name: 'Dr. Chloe Evans',
         image: doc13,
-        speciality: 'General physician',
-        degree: 'MBBS',
+        speciality: 'Data Science',
+        degree: 'B Tech.',
         experience: '4 Years',
         about: 'Dr. Davis has a strong commitment to delivering comprehensive medical care, focusing on preventive medicine, early diagnosis, and effective treatment strategies. Dr. Davis has a strong commitment to delivering comprehensive medical care, focusing on preventive medicine, early diagnosis, and effective treatment strategies.',
         fees: 50,
@@ -277,11 +273,11 @@ export const mentors = [
         }
     },
     {
-        _id: 'doc14',
+        _id: 'men14',
         name: 'Dr. Ryan Martinez',
         image: doc14,
-        speciality: 'Gynecologist',
-        degree: 'MBBS',
+        speciality: 'Spring Boot',
+        degree: 'B Tech.',
         experience: '3 Years',
         about: 'Dr. Davis has a strong commitment to delivering comprehensive medical care, focusing on preventive medicine, early diagnosis, and effective treatment strategies. Dr. Davis has a strong commitment to delivering comprehensive medical care, focusing on preventive medicine, early diagnosis, and effective treatment strategies.',
         fees: 60,
@@ -291,11 +287,11 @@ export const mentors = [
         }
     },
     {
-        _id: 'doc15',
+        _id: 'men15',
         name: 'Dr. Amelia Hill',
         image: doc15,
-        speciality: 'Dermatologist',
-        degree: 'MBBS',
+        speciality: 'Machine Learning',
+        degree: 'B Tech.',
         experience: '1 Years',
         about: 'Dr. Davis has a strong commitment to delivering comprehensive medical care, focusing on preventive medicine, early diagnosis, and effective treatment strategies. Dr. Davis has a strong commitment to delivering comprehensive medical care, focusing on preventive medicine, early diagnosis, and effective treatment strategies.',
         fees: 30,

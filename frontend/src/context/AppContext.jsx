@@ -1,15 +1,19 @@
 import { createContext } from "react";
 import { mentors } from "../assets/assets";
 
-const AppContext = createContext();
+export const AppContext = createContext();
 
-const AppContextProvider = ({ children }) => {
+const AppContextProvider = (props) => {
+
+  const value={
+    mentors
+  }
+
   return (
-    <AppContext.Provider value={{ mentors }}>
-      {children}
+    <AppContext.Provider value={value}>
+      {props.children}
     </AppContext.Provider>
   );
 };
 
-export { AppContext };
 export default AppContextProvider;
