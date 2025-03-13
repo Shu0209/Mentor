@@ -11,7 +11,7 @@ const SpecialityMenu = () => {
           Browse through our extensive list of trusted mentors and schedule your free session.
         </p>
 
-        {/* Speciality Grid */}
+      
         <div className='grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6 md:gap-10 p-5 w-full'>
           {specialityData.map((item, index) => (
             <Link key={index} to={`/mentors/${item.speciality}`} className='flex flex-col items-center hover:scale-110 duration-300'>

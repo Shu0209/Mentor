@@ -6,7 +6,7 @@ const Header = () => {
     <div className='flex justify-center px-4'>
       <div className='bg-gradient-to-r from-primary to-pink-800 flex flex-col md:flex-row justify-between items-center w-full max-w-[90vw] m-5 rounded-2xl p-6'>
 
-        {/* Left Content */}
+        
         <div className='text-center md:text-left flex flex-col items-center md:items-start'>
           <div className='text-white text-3xl sm:text-4xl md:text-5xl font-bold p-2 m-2'>
             <p>Book Free Session <br /> With Our Trusted Mentors</p>
@@ -28,7 +28,7 @@ const Header = () => {
           </div>
         </div>
 
-        {/* Right Image */}
+       
         <div className='mt-6 md:mt-0'>
           <img className='w-[250px] sm:w-[300px] md:w-[400px] lg:w-[500px]' src={assets.header_img2} alt="Header Image" />
         </div>

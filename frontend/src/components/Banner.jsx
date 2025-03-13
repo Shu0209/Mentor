@@ -8,7 +8,7 @@ const Banner = () => {
     <div className="flex justify-center p-4">
       <div className="flex flex-col lg:flex-row justify-between items-center bg-gradient-to-r from-primary to-pink-800 w-[90vw] p-6 rounded-3xl">
         
-        {/* Text Section */}
+        
         <div className="text-white text-center lg:text-left p-4 flex flex-col gap-4">
           <p className="text-[clamp(2rem,5vw,3.5rem)] font-bold leading-tight">
             Book Appointment
@@ -24,7 +24,7 @@ const Banner = () => {
           </button>
         </div>
 
-        {/* Image Section */}
+        
         <div className="mt-6 lg:mt-0 w-full flex justify-center">
           <img 
             className="w-[80%] max-w-[350px] sm:max-w-[400px] md:max-w-[500px] lg:max-w-[600px] object-cover"

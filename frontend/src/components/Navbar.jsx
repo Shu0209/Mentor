@@ -10,19 +10,19 @@ const Navbar = () => {
   return (
     <div className='flex justify-between items-center py-4 px-6 md:px-20 shadow-2xl h-20 md:h-24 relative bg-white'>
       
-      {/* Logo */}
+      
       <div className='w-1/3 md:w-1/6 p-2'>
         <img onClick={() => navigate('/')} className='w-32 md:w-40 cursor-pointer' src={assets.Logo} alt="Logo" />
       </div>
 
-      {/* Hamburger Menu (Mobile) */}
+     
       <div className='md:hidden flex items-center'>
         <button onClick={() => setShowMenu(!showMenu)}>
           <img src={assets.menu_icon} alt="Menu" className="w-8" />
         </button>
       </div>
 
-      {/* Navigation Links (Hidden on Mobile) */}
+      
       <div className={`absolute md:static top-16 left-0 w-full md:w-3/6 bg-white md:bg-transparent md:flex ${showMenu ? 'block' : 'hidden'} text-center md:text-left`}>
         <ul className='flex flex-col md:flex-row md:justify-between w-full text-lg md:text-2xl cursor-pointer'>
           <NavLink to='/' className="p-3 md:p-2 md:m-2 hover:underline hover:text-primary duration-300 ease-in">
@@ -40,7 +40,7 @@ const Navbar = () => {
         </ul>
       </div>
 
-      {/* Profile or Signup */}
+     
       <div className='w-1/3 md:w-1/6 p-2 flex justify-end'>
         {token ? (
           <div className='flex cursor-pointer items-center group relative'>
