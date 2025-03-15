@@ -1,6 +1,7 @@
 import React, { useContext, useEffect ,useState} from 'react'
 import { useParams } from 'react-router-dom'
 import { AppContext } from '../context/AppContext'
+import RelatedMentor from '../components/RelatedMentors'
 
 const Appoinment = () => {
 
@@ -120,6 +121,14 @@ setMenSlots(prev=>([...prev,timeSlots]))
       </div>
       </div>
       </div>
+
+
+{/* Related Mentors */}
+<div>
+<RelatedMentor menId={menId} speciality={menInfo.speciality}/>
+</div>
+
+
     </div>
   )
 }

@@ -23,7 +23,7 @@ const TopMentors = () => {
             {mentors.slice(0, 10).map((item) => (
               <div
                 key={item._id}
-                onClick={() => navigate(`/appoinment/${item._id}`)}
+                onClick={() => navigate(`/appointment/${item._id}`)}
                 className="bg-blue-100 border border-primary rounded-3xl cursor-pointer relative transition-transform hover:scale-105 duration-300"
               >
                 <img

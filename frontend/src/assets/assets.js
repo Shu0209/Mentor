@@ -150,7 +150,7 @@ export const mentors = [
         _id: 'men5',
         name: 'Dr. Jennifer Garcia',
         image: doc5,
-        speciality: 'Cyber Security',
+        speciality: 'Blockchain',
         degree: 'B Tech.',
         experience: '4 Years',
         about: 'Dr. Davis has a strong commitment to delivering comprehensive medical care, focusing on preventive medicine, early diagnosis, and effective treatment strategies. Dr. Davis has a strong commitment to delivering comprehensive medical care, focusing on preventive medicine, early diagnosis, and effective treatment strategies.',
