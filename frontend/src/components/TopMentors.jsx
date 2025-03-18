@@ -45,7 +45,7 @@ const TopMentors = () => {
           
           <div className="flex justify-center">
             <button
-              onClick={() => navigate(`/mentors`)}
+              onClick={() => {navigate(`/mentors`); scrollTo(0,0)}}
               className="font-bold text-lg md:text-2xl m-2 p-2 bg-gray-200 text-black w-full sm:w-[150px] h-[50px] rounded-3xl hover:scale-105 transition-transform duration-300"
             >
               More
