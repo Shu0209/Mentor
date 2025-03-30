@@ -9,6 +9,8 @@ import MyAppointments from "./pages/MyAppointments"
 import Appoinment from "./pages/Appoinment"
 import Navbar from "./components/Navbar.jsx"
 import Footer from "./components/Footer.jsx"
+import { ToastContainer, toast } from 'react-toastify';
+
 
 function App() {
  
@@ -16,6 +18,7 @@ function App() {
   return (
     <>
      <div className="">
+      <ToastContainer/>
       <Navbar/>
       <Routes>
         <Route path='/' element={<Home/>}/>

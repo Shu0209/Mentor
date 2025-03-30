@@ -1,13 +1,39 @@
-import { createContext } from "react";
-import { mentors } from "../assets/assets";
+import { createContext, useEffect, useState } from "react";
+import axios from 'axios'
+import { toast } from "react-toastify";
 
 export const AppContext = createContext();
 
 const AppContextProvider = (props) => {
 
+const backendUrl=import.meta.env.VITE_BACKEND_URL
+const [mentors,setMentors]=useState([])
+
   const value={
     mentors
   }
+
+const getMentorData=async()=>{
+  try {
+    const {data}=await axios.get(backendUrl + '/api/mentor/list')
+    if(data.success){
+setMentors(data.mentors)
+    }
+    else{
+      toast.error(data.message)
+    }
+
+
+  } catch (error) {
+    console.log(error)
+    toast.error(error.message)
+  }
+}
+
+useEffect(()=>{
+  getMentorData()
+},[])
+
 
   return (
     <AppContext.Provider value={value}>

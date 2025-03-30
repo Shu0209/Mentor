@@ -79,4 +79,22 @@ res.json({success:false,message:error.message})
     }
 }
 
-export {addMentor,loginAdmin}
+
+
+
+//API to get all mentor list for admin panel
+
+const allMentors=async (req,res)=>{
+    try {
+        
+const mentors=await mentorModel.find({}).select('-password')
+res.json({success:true,mentors})
+
+    } catch (error) {
+        console.log(error)
+res.json({success:false,message:error.message})
+    }
+}
+
+
+export {addMentor,loginAdmin,allMentors}
