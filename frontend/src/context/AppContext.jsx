@@ -13,7 +13,7 @@ const [mentors,setMentors]=useState([])
     mentors
   }
 
-const getMentorData=async()=>{
+const getMentorsData=async()=>{
   try {
     const {data}=await axios.get(backendUrl + '/api/mentor/list')
     if(data.success){
@@ -31,7 +31,7 @@ setMentors(data.mentors)
 }
 
 useEffect(()=>{
-  getMentorData()
+  getMentorsData()
 },[])
 
 

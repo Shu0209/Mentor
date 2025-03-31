@@ -1,8 +1,11 @@
+import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
-import { mentors } from "../assets/assets";
+import { AppContext } from "../context/AppContext";
+
 
 const TopMentors = () => {
   const navigate = useNavigate();
+  const {mentors}=useContext(AppContext)
 
   return (
     <>

@@ -54,7 +54,7 @@ timeSlots.push({
   time:formattedTime
 })
 
-currentDate.setMinutes(currentDate.getMinutes()+30)
+currentDate.setMinutes(currentDate.getMinutes()+150)
 }
 
 setMenSlots(prev=>([...prev,timeSlots]))
