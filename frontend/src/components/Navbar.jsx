@@ -1,98 +1,134 @@
-import React, { useRef, useState } from 'react';
+import React, { useContext, useRef, useState, useEffect } from 'react';
 import { assets } from '../assets/assets';
 import { NavLink, useNavigate } from 'react-router-dom';
+import { AppContext } from '../context/AppContext';
 
 const Navbar = () => {
   const navigate = useNavigate();
+  const { token, setToken } = useContext(AppContext);
   const [showMenu, setShowMenu] = useState(false);
-  const [token, setToken] = useState(true);
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef(null);
 
+  // Close dropdown when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setIsOpen(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
+
+  const logout = () => {
+    setToken(false);
+    localStorage.removeItem('token');
+    navigate('/');
+  };
+
   return (
-    <div className="flex justify-between items-center py-4 px-6 md:px-20 shadow-2xl h-20 md:h-24 bg-white relative">
+    <div className="flex justify-between items-center py-4 px-6 md:px-20 shadow-md h-20 md:h-24 bg-white sticky top-0 z-50">
       {/* Logo */}
       <div className="w-1/3 md:w-1/6">
         <img 
           onClick={() => navigate("/")} 
-          className="w-28 md:w-36 cursor-pointer" 
+          className="w-28 md:w-36 cursor-pointer hover:opacity-90 transition-opacity" 
           src={assets.Logo} 
           alt="Logo" 
         />
       </div>
 
       {/* Navigation Menu */}
-      <div className={`absolute md:static top-16 left-0 w-full md:w-auto bg-white md:bg-transparent md:flex 
-          ${showMenu ? "block" : "hidden"} text-center md:text-left transition-all duration-300`}>
-        <ul className="flex flex-col md:flex-row md:justify-between w-full text-lg md:text-xl cursor-pointer">
+      <div className={`absolute md:static top-20 left-0 w-full md:w-auto bg-white md:bg-transparent md:flex 
+          ${showMenu ? "block" : "hidden"} shadow-md md:shadow-none z-40`}>
+        <ul className="flex flex-col md:flex-row md:justify-between w-full text-lg md:text-xl">
           {["/", "/mentors", "/about", "/contact"].map((path, index) => (
-            <NavLink 
-              key={index}
-              to={path}
-              className="p-4 md:p-2 md:m-2 hover:underline hover:text-primary transition duration-300 ease-in"
-              onClick={() => setShowMenu(false)}
-            >
-              {path === "/" ? "HOME" : path.replace("/", "").toUpperCase()}
-            </NavLink>
+            <li key={index}>
+              <NavLink 
+                to={path}
+                className={({ isActive }) => 
+                  `block p-4 md:p-2 md:m-2 hover:text-primary transition-colors
+                  ${isActive ? 'text-primary font-medium' : 'text-gray-700'}`
+                }
+                onClick={() => setShowMenu(false)}
+              >
+                {path === "/" ? "HOME" : path.replace("/", "").toUpperCase()}
+              </NavLink>
+            </li>
           ))}
         </ul>
       </div>
 
-      {/* Right Section - Profile & Toggle Button */}
-      <div className="w-1/3 md:w-1/6 flex justify-end items-center">
+      {/* Right Section */}
+      <div className="w-1/3 md:w-1/6 flex justify-end items-center gap-4">
         {token ? (
-          <div className="flex items-center gap-4">
+          <>
             {/* Profile Dropdown */}
             <div ref={dropdownRef} className="relative">
-              {/* Profile Button */}
               <div 
-                className="flex cursor-pointer items-center"
+                className="flex items-center gap-2 cursor-pointer hover:opacity-80 transition-opacity"
                 onClick={() => setIsOpen(!isOpen)}
               >
-                <img className="w-10 rounded-full" src={assets.profile_pic} alt="Profile" />
-                <img className="w-3 ml-2" src={assets.dropdown_icon} alt="Dropdown" />
+                <img className="w-10 h-10 rounded-full object-cover" src={assets.profile_pic} alt="Profile" />
+                <img 
+                  className={`w-3 transition-transform ${isOpen ? 'rotate-180' : ''}`} 
+                  src={assets.dropdown_icon} 
+                  alt="Dropdown" 
+                />
               </div>
 
-              {/* Dropdown Menu */}
               {isOpen && (
-                <div className="absolute top-12 right-0 w-max z-50 bg-gray-500 text-white rounded-2xl p-4 text-lg shadow-lg">
-                  {["my-profile", "my-appointments"].map((route, index) => (
-                    <p 
-                      key={index} 
+                <div className="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-xl py-1 z-50 border border-gray-200">
+                  {[
+                    { path: 'my-profile', label: 'My Profile' },
+                    { path: 'my-appointments', label: 'My Appointments' }
+                  ].map((item) => (
+                    <button
+                      key={item.path}
                       onClick={() => {
-                        navigate(route);
+                        navigate(item.path);
                         setIsOpen(false);
-                      }} 
-                      className="p-1 cursor-pointer hover:underline"
+                        setShowMenu(false);
+                      }}
+                      className="block w-full text-left px-4 py-2 text-gray-700 hover:bg-gray-100"
                     >
-                      {route.replace("-", " ").toUpperCase()}
-                    </p>
+                      {item.label}
+                    </button>
                   ))}
-                  <p 
+                  <button
                     onClick={() => {
-                      setToken(false);
+                      logout();
                       setIsOpen(false);
-                    }} 
-                    className="p-1 cursor-pointer hover:underline"
+                    }}
+                    className="block w-full text-left px-4 py-2 text-gray-700 hover:bg-gray-100 border-t border-gray-200"
                   >
-                    LOGOUT
-                  </p>
+                    Logout
+                  </button>
                 </div>
               )}
             </div>
 
-            {/* Mobile Toggle Button (Moved to Right) */}
-            <button onClick={() => setShowMenu(!showMenu)} className="md:hidden">
-              <img src={assets.menu_icon} alt="Menu" className="w-8" />
+            {/* Mobile Menu Button */}
+            <button 
+              onClick={() => setShowMenu(!showMenu)} 
+              className="md:hidden p-2 focus:outline-none"
+              aria-label="Toggle menu"
+            >
+              <img 
+                src={showMenu ? assets.cross_icon : assets.menu_icon} 
+                alt="Menu" 
+                className="w-6" 
+              />
             </button>
-          </div>
+          </>
         ) : (
           <button 
-            onClick={() => navigate("login")}
-            className="text-white text-lg w-28 md:w-40 p-2 h-10 md:h-12 rounded-2xl bg-primary 
-              hover:scale-105 transition duration-300 ease-in-out"
+            onClick={() => navigate("/login")}
+            className="bg-primary hover:bg-primary-dark text-white font-medium py-2 px-4 md:px-6 rounded-full transition-colors shadow-sm hover:shadow-md"
           >
-            Create Account
+            Sign In
           </button>
         )}
       </div>

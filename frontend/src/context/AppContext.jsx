@@ -8,10 +8,9 @@ const AppContextProvider = (props) => {
 
 const backendUrl=import.meta.env.VITE_BACKEND_URL
 const [mentors,setMentors]=useState([])
+const [token,setToken]=useState(localStorage.getItem('token')?localStorage.getItem('token'):false)
 
-  const value={
-    mentors
-  }
+  
 
 const getMentorsData=async()=>{
   try {
@@ -29,6 +28,12 @@ setMentors(data.mentors)
     toast.error(error.message)
   }
 }
+
+const value={
+  mentors,
+  token,setToken,backendUrl
+}
+
 
 useEffect(()=>{
   getMentorsData()
