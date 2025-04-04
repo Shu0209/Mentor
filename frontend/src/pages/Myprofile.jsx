@@ -1,44 +1,12 @@
 import React, { useContext, useState } from "react";
 import { AppContext } from "../context/AppContext";
-import { toast } from "react-toastify";
-import axios from "axios";
 
 const MyProfile = () => {
- 
-  const {userData,setUserData,token,backendUrl,loadUserProfileData}=useContext(AppContext)
+  
+const {userData,setUserData}=useContext(AppContext)
+
 
   const [isEdit, setIsEdit] = useState(false);
-
-  const [image,setImage]=useState(false)
-
-  const updateUserProfileData=async()=>{
-try {
-  const formData=new FormData()
-   
-  formData.append('name',userData.name)
-  formData.append('phone',userData.phone)
-  formData.append('address',JSON.stringify(userData.address))
-  formData.append('gender',userData.gender)
-  formData.append('dob',userData.dob)
-  
-  image && formData.append('image',image)
-
-  const {data}=await axios.post(backendUrl +'/api/user/update-profile',formData,{headers:{token}})
-
-  if(data.success){
-    toast.success(data.message)
-    await loadUserProfileData()
-    setIsEdit(false)
-    setImage(false)
-  }
-  else{
-    toast.error(data.message)
-  }
-} catch (error) {
-  console.log(error)
-  toast.error(error.message)
-}
-  }
 
   // Handle input changes for text fields
   const handleChange = (e) => {
@@ -49,7 +17,6 @@ try {
   const handleImageChange = (e) => {
     const file = e.target.files[0];
     if (file) {
-      setImage(file);
       const imageUrl = URL.createObjectURL(file);
       setUserData({ ...userData, image: imageUrl });
     }
@@ -201,16 +168,11 @@ try {
 
         {/* Edit/Save Button */}
         <button
-            onClick={() => {
-              if (isEdit) {
-                updateUserProfileData();
-              }
-              setIsEdit(!isEdit);
-            }}
-            className="mt-6 bg-gradient-to-r from-blue-500 to-blue-700 text-white px-6 py-2 rounded-lg text-lg font-medium shadow-md hover:scale-105 transition-all duration-300"
-          >
-            {isEdit ? "Save Changes" : "Edit Profile"}
-          </button>
+          onClick={() => setIsEdit(!isEdit)}
+          className="mt-6 bg-gradient-to-r from-blue-500 to-blue-700 text-white px-6 py-2 rounded-lg text-lg font-medium shadow-md hover:scale-105 transition-all duration-300"
+        >
+          {isEdit ? "Save Changes" : "Edit Profile"}
+        </button>
       </div>
     </div>
   );
