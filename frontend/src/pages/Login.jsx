@@ -50,9 +50,8 @@ else{
 }
 
     } catch (error) {
-      toast.error(error.response?.data?.message || "Something went wrong");
+      toast.error(error.message)
     }
-    
 
   }
 
@@ -63,7 +62,6 @@ else{
       navigate('/')
     }
   },[token])
-
   return (
     
     <form onSubmit={onSubmitHandler} className="w-full max-w-md mx-auto bg-white p-6 rounded-lg shadow-md my-15">
