@@ -1,21 +1,44 @@
-import React, { useState } from "react";
-import { assets } from "../assets/assets";
+import React, { useContext, useState } from "react";
+import { AppContext } from "../context/AppContext";
+import { toast } from "react-toastify";
+import axios from "axios";
 
 const MyProfile = () => {
-  const [userData, setUserData] = useState({
-    name: "Edward Vincent",
-    email: "richardjameswap@gmail.com",
-    image: assets.profile_pic,
-    phone: "+91 9838602956",
-    address: {
-      line1: "57th Cross, Richmond",
-      line2: "Circle, Church Road, London",
-    },
-    gender: "Male",
-    dob: "2000-01-20",
-  });
+ 
+  const {userData,setUserData,token,backendUrl,loadUserProfileData}=useContext(AppContext)
 
   const [isEdit, setIsEdit] = useState(false);
+
+  const [image,setImage]=useState(false)
+
+  const updateUserProfileData=async()=>{
+try {
+  const formData=new FormData()
+   
+  formData.append('name',userData.name)
+  formData.append('phone',userData.phone)
+  formData.append('address',JSON.stringify(userData.address))
+  formData.append('gender',userData.gender)
+  formData.append('dob',userData.dob)
+  
+  image && formData.append('image',image)
+
+  const {data}=await axios.post(backendUrl +'/api/user/update-profile',formData,{headers:{token}})
+
+  if(data.success){
+    toast.success(data.message)
+    await loadUserProfileData()
+    setIsEdit(false)
+    setImage(false)
+  }
+  else{
+    toast.error(data.message)
+  }
+} catch (error) {
+  console.log(error)
+  toast.error(error.message)
+}
+  }
 
   // Handle input changes for text fields
   const handleChange = (e) => {
@@ -26,12 +49,13 @@ const MyProfile = () => {
   const handleImageChange = (e) => {
     const file = e.target.files[0];
     if (file) {
+      setImage(file);
       const imageUrl = URL.createObjectURL(file);
       setUserData({ ...userData, image: imageUrl });
     }
   };
 
-  return (
+  return userData && (
     <div className="max-w-lg mx-auto bg-white p-8 rounded-xl shadow-lg border border-gray-200">
       <div className="flex flex-col items-center text-center">
         {/* Profile Image */}
@@ -177,11 +201,16 @@ const MyProfile = () => {
 
         {/* Edit/Save Button */}
         <button
-          onClick={() => setIsEdit(!isEdit)}
-          className="mt-6 bg-gradient-to-r from-blue-500 to-blue-700 text-white px-6 py-2 rounded-lg text-lg font-medium shadow-md hover:scale-105 transition-all duration-300"
-        >
-          {isEdit ? "Save Changes" : "Edit Profile"}
-        </button>
+            onClick={() => {
+              if (isEdit) {
+                updateUserProfileData();
+              }
+              setIsEdit(!isEdit);
+            }}
+            className="mt-6 bg-gradient-to-r from-blue-500 to-blue-700 text-white px-6 py-2 rounded-lg text-lg font-medium shadow-md hover:scale-105 transition-all duration-300"
+          >
+            {isEdit ? "Save Changes" : "Edit Profile"}
+          </button>
       </div>
     </div>
   );
