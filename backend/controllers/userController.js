@@ -184,7 +184,7 @@ const bookAppointment=async(req,res)=>{
     }
 }
 
-//API to my appointment page forntend
+//API for my appointment page forntend
 const listAppointment=async(req,res)=>{
 try {
     
@@ -199,4 +199,51 @@ res.json({success:true,appointments})
 }
 }
 
-export {registerUser,loginUser,getProfile,updateProfile,bookAppointment,listAppointment}
+
+//Api to cancel appointment
+const cancelAppointment=async(req,res)=>{
+    try {
+        
+        const {userId,appointmentId}=req.body
+
+        const appointmentData=await appointmentModel.findById(appointmentId)
+
+        //verify appointment user
+        if(appointmentData.userId!==userId){
+            return res.json({
+                success:false,message:"Unauthorized action"
+            })
+        }
+
+        await appointmentModel.findByIdAndUpdate(appointmentId,{cancelled:true})
+
+        //releasing mentor slot
+
+        const {menId,slotDate,slotTime}=appointmentData
+        
+        const mentorData=await mentorModel.findById(menId)
+         
+        let slots_booked=mentorData.slots_booked
+
+        slots_booked[slotDate]=slots_booked[slotDate].filter(e=>e!==slotTime)
+
+        await mentorModel.findByIdAndUpdate(menId,{slots_booked})
+
+        res.json({success:true,message:"Appointment Canceled"})
+
+
+
+    } catch (error) {
+        console.log(error)
+        res.json({success:false,message:error.message})
+    }
+}
+
+
+//API for payment using razor pay
+
+const paymentRazorpay=async(req,res)=>{
+    
+}
+
+export {registerUser,loginUser,getProfile,updateProfile,bookAppointment,listAppointment,cancelAppointment}

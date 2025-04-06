@@ -6,9 +6,15 @@ import { toast } from 'react-toastify'
 
 const MyAppointments = () => {
 
-const {backendUrl,token}=useContext(AppContext)
+const {backendUrl,token,getMentorsData}=useContext(AppContext)
 
 const [appointments,setAppointments]=useState([])
+const months=["","Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"]
+
+const slotDateFormat=(slotDate)=>{
+  const dateArray=slotDate.split('_')
+  return dateArray[0]+" "+months[Number(dateArray[1])]+" "+dateArray[2]
+}
 
 const getUserAppointments=async()=>{
   try {
@@ -23,6 +29,25 @@ if(data.success){
   } catch (error) {
     console.log(error)
     toast.error(error.message)
+  }
+}
+
+const cancelAppointment=async(appointmentId)=>{
+  try {
+    
+const {data}=await axios.post(backendUrl+'/api/user/cancel-appointment',{appointmentId},{headers:{token}})
+
+if(data.success){
+  toast.success(data.message)
+  getUserAppointments()
+  getMentorsData()
+}
+else{
+  toast.error(data.message)
+}
+
+  } catch (error) {
+    
   }
 }
 
@@ -56,19 +81,21 @@ useEffect(()=>{
           <p className="text-sm text-gray-600">{item.menData.speciality}</p>
           <div className="mt-2">
             <p className="text-xs font-medium text-gray-500">Date & Time:</p>
-            <p className="text-sm text-gray-700">{item.slotDate} | {item.slotTime}</p>
+            <p className="text-sm text-gray-700">{slotDateFormat(item.slotDate)} | {item.slotTime}</p>
           </div>
         </div>
 
         {/* Buttons Section */}
         <div className="flex flex-col sm:flex-col gap-2 w-full sm:w-auto">
-          <button className="w-full sm:w-auto px-4 py-2 rounded-md shadow-md  hover:bg-green-600 hover:text-white transition-all">
+          
+          {!item.cancelled && <button className="w-full sm:w-auto px-4 py-2 rounded-md shadow-md  hover:bg-green-600 hover:text-white transition-all">
             Pay Online
-          </button>
+          </button>}
 
-          <button className="w-full sm:w-auto px-4 py-2 rounded-md shadow-md hover:text-white hover:bg-red-600 transition-all">
+          {!item.cancelled && <button onClick={()=>cancelAppointment(item._id)} className="w-full sm:w-auto px-4 py-2 rounded-md shadow-md hover:text-white hover:bg-red-600 transition-all">
             Cancel Appointment
-          </button>
+          </button>}
+          {item.cancelled && <button className="w-full sm:w-auto px-4 py-2 rounded-md shadow-md text-red-700 ">Appointment Cancelled</button>}
         </div>
       </div>
     ))}

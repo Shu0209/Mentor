@@ -24,7 +24,7 @@ const Navbar = () => {
           className="h-12 w-45 object-contain"
         />
         <p className="text-xs p-1 w-15 text-center font-semibold text-gray-800 border-2 border-gray-400 rounded-xl">
-          {aToken ? "Admin" : "Doctor"}
+          {aToken ? "Admin" : "Mentor"}
         </p>
       </div>
 
