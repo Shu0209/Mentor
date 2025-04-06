@@ -29,7 +29,7 @@ const getAvailableSlots=async()=>{
 
  let today=new Date()
 
- for(let i=0;i<7;i++){
+ for(let i=1;i<7;i++){
 
   let currentDate=new Date(today)
   currentDate.setDate(today.getDate()+i)
@@ -53,10 +53,24 @@ let timeSlots=[]
 while(currentDate<endTime){
 let formattedTime=currentDate.toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'})
 
+let day=currentDate.getDate()
+let month=currentDate.getMonth()+1
+let year=currentDate.getFullYear()
+
+const slotDate=day+"_"+month+"_"+year
+const slotTime=formattedTime
+
+const isSlotAvailable=menInfo.slots_booked[slotDate] && menInfo.slots_booked[slotDate].includes(slotTime) ? false :true
+
+if(isSlotAvailable){
+//add slot to array
 timeSlots.push({
   datetime:new Date(currentDate),
   time:formattedTime
 })
+}
+
+
 
 currentDate.setMinutes(currentDate.getMinutes()+150)
 }
