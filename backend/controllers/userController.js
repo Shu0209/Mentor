@@ -3,6 +3,8 @@ import bcrypt from 'bcrypt'
 import userModel from '../models/userModel.js'
 import jwt from 'jsonwebtoken'
 import {v2 as cloudinary} from 'cloudinary'
+import mentorModel from '../models/mentorModel.js'
+import appointmentModel from '../models/appointmentModel.js'
 
 //API to register user
 
@@ -122,4 +124,64 @@ await userModel.findByIdAndUpdate(userId,{image:imageURL})
 }
 }
 
-export {registerUser,loginUser,getProfile,updateProfile}
+
+
+
+//API to book Appointment
+const bookAppointment=async(req,res)=>{
+    try {
+        const {userId,menId,slotDate,slotTime}=req.body
+
+    const menData=await mentorModel.findById(menId).select('-password')
+
+    if(!menData.available){
+        return res.json({success:false,message:'Mentor Not Available'})
+    }
+
+    let slots_booked=menData.slots_booked
+
+    //Check for Slot Avilability
+    if(slots_booked[slotDate]){
+        if(slots_booked[slotDate].includes(slotTime)){
+            return res.json({success:false,message:'Slot Not Available'})
+        }
+        else{
+            slots_booked[slotDate].push(slotTime)
+        }
+    }
+    else{
+        slots_booked[slotDate]=[]
+        slots_booked[slotDate].push(slotTime)
+    }
+
+    const userData=await userModel.findById(userId).select('-password')
+
+    delete menData.slots_booked
+
+    const appointmentData={
+        userId,
+        menId,
+        userData,
+        menData,
+        amount:menData.fees,
+        slotTime,
+        slotDate,
+        date:Date.now()
+    }
+
+    const newAppointment=new appointmentModel(appointmentData)
+    await newAppointment.save()
+
+    //save new slots data in menData
+    await mentorModel.findByIdAndUpdate(menId,{slots_booked})
+
+    res.json({success:true,message:"Appointment Booked"})
+
+
+    } catch (error) {
+        console.log(error)
+        res.json({success:false,message:error.message})
+    }
+}
+
+export {registerUser,loginUser,getProfile,updateProfile,bookAppointment}

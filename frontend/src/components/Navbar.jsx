@@ -5,7 +5,7 @@ import { AppContext } from '../context/AppContext';
 
 const Navbar = () => {
   const navigate = useNavigate();
-  const { token, setToken } = useContext(AppContext);
+  const { token, setToken,userData} = useContext(AppContext);
   const [showMenu, setShowMenu] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef(null);
@@ -71,7 +71,7 @@ const Navbar = () => {
                 className="flex items-center gap-2 cursor-pointer hover:opacity-80 transition-opacity"
                 onClick={() => setIsOpen(!isOpen)}
               >
-                <img className="w-10 h-10 rounded-full object-cover" src={assets.profile_pic} alt="Profile" />
+                <img className="w-10 h-10 rounded-full object-cover" src={userData.image} alt="Profile" />
                 <img 
                   className={`w-3 transition-transform ${isOpen ? 'rotate-180' : ''}`} 
                   src={assets.dropdown_icon} 

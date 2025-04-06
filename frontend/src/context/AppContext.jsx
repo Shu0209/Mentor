@@ -50,7 +50,7 @@ else{
 
 
 const value={
-  mentors,
+  mentors,getMentorsData,
   token,setToken,backendUrl,userData,setUserData,loadUserProfileData
 }
 

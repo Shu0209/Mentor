@@ -1,13 +1,17 @@
 import React, { useContext, useEffect ,useState} from 'react'
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import { AppContext } from '../context/AppContext'
 import RelatedMentor from '../components/RelatedMentors'
+import { toast } from 'react-toastify'
+import axios from 'axios'
 
 const Appoinment = () => {
 
   const {menId}=useParams()
-  const {mentors}=useContext(AppContext)
+  const {mentors,backendUrl,token,getMentorsData}=useContext(AppContext)
   const daysOfWeek=['SUN','MON','TUE','WED','THU','FRI','SAT']
+
+  const navigate =useNavigate()
 
   const [menInfo,setMenInfo]=useState(null)
   const [menSlots,setMenSlots]=useState([])
@@ -60,6 +64,40 @@ currentDate.setMinutes(currentDate.getMinutes()+150)
 setMenSlots(prev=>([...prev,timeSlots]))
  }
 }
+
+
+const bookAppointment=async()=>{
+  if(!token){
+    toast.warn('Login to book Appointment')
+    return navigate('/login')
+  }
+  try {
+    
+const date=menSlots[slotIndex][0].datetime
+
+let day=date.getDate()
+let month=date.getMonth()+1
+let year =date.getFullYear()
+
+const slotDate=day+"_"+month+"_"+year
+console.log(slotDate)
+
+const {data}=await axios.post(backendUrl + '/api/user/book-appointment',{menId,slotDate,slotTime},{headers:{token}})
+
+if(data.success){
+  toast.success(data.message)
+  getMentorsData()
+  navigate('/my-appointments')
+}
+else{
+  toast.error(data.message)
+}
+  } catch (error) {
+ console.log(error)
+ toast.error(error.message)
+  }
+}
+
 
   useEffect(()=>{
     fetchMenInfo()
@@ -117,7 +155,7 @@ setMenSlots(prev=>([...prev,timeSlots]))
       </p>
     ))}
 </div>
-<button className='bg-primary text-white m-4 p-3 rounded-2xl hover:p-4 duration-500'>Book free appointment</button>
+<button onClick={bookAppointment} className='bg-primary text-white m-4 p-3 rounded-2xl hover:p-4 duration-500'>Book Appointment</button>
       </div>
       </div>
       </div>
