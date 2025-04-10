@@ -1,9 +1,9 @@
 import React, { useContext, useState } from 'react'
 import { assets } from '../../assets/assets'
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
-import { AdminContext } from '../../context/adminContext';
 import { toast } from 'react-toastify';
 import axios from 'axios';
+import { AdminContext } from '../../context/AdminContext';
 
 
 const AddMentor = () => {

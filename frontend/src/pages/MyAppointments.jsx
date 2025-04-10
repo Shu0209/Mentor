@@ -51,6 +51,34 @@ else{
   }
 }
 
+
+// const intitpay=(order)=>{
+
+// const options={
+
+  
+// }
+
+// }
+
+// const appointmentRazorpay=async(appointmentId)=>{
+
+// try {
+  
+// const {data} =await axios.post(backendUrl+'/api/user/payment-razorpay',{appointmentId},{headers:{token}})
+
+// if(data.success){
+//   intitpay(data.order)
+// }
+
+// } catch (error) {
+  
+// }
+
+// }
+
+
+
 useEffect(()=>{
   if(token){
     getUserAppointments()
@@ -88,7 +116,7 @@ useEffect(()=>{
         {/* Buttons Section */}
         <div className="flex flex-col sm:flex-col gap-2 w-full sm:w-auto">
           
-          {!item.cancelled && <button className="w-full sm:w-auto px-4 py-2 rounded-md shadow-md  hover:bg-green-600 hover:text-white transition-all">
+          {!item.cancelled && <button onClick={()=>appointmentRazorpay(item._id)} className="w-full sm:w-auto px-4 py-2 rounded-md shadow-md  hover:bg-green-600 hover:text-white transition-all">
             Pay Online
           </button>}
 
