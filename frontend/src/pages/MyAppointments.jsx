@@ -116,14 +116,15 @@ useEffect(()=>{
         {/* Buttons Section */}
         <div className="flex flex-col sm:flex-col gap-2 w-full sm:w-auto">
           
-          {!item.cancelled && <button onClick={()=>appointmentRazorpay(item._id)} className="w-full sm:w-auto px-4 py-2 rounded-md shadow-md  hover:bg-green-600 hover:text-white transition-all">
+          {!item.cancelled && !item.isCompleted &&<button onClick={()=>appointmentRazorpay(item._id)} className="w-full sm:w-auto px-4 py-2 rounded-md shadow-md  hover:bg-green-600 hover:text-white transition-all">
             Pay Online
           </button>}
 
-          {!item.cancelled && <button onClick={()=>cancelAppointment(item._id)} className="w-full sm:w-auto px-4 py-2 rounded-md shadow-md hover:text-white hover:bg-red-600 transition-all">
+          {!item.cancelled && !item.isCompleted &&<button onClick={()=>cancelAppointment(item._id)} className="w-full sm:w-auto px-4 py-2 rounded-md shadow-md hover:text-white hover:bg-red-600 transition-all">
             Cancel Appointment
           </button>}
-          {item.cancelled && <button className="w-full sm:w-auto px-4 py-2 rounded-md shadow-md text-red-700 ">Appointment Cancelled</button>}
+          {item.cancelled && !item.isCompleted &&<button className="w-full sm:w-auto px-4 py-2 rounded-md shadow-md text-red-700 ">Appointment Cancelled</button>}
+          {item.isCompleted &&<button className='text-green-600 border-2 border-green-600 p-2 rounded-3xl'>Completed</button>}
         </div>
       </div>
     ))}

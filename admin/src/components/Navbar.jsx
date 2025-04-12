@@ -2,15 +2,19 @@ import React, { useContext } from 'react'
 import { assets } from '../assets/assets'
 import { AdminContext } from '../context/adminContext'
 import {  useNavigate } from 'react-router-dom'
+import { MentorContext } from '../context/MentorContext'
 
 const Navbar = () => {
     const {aToken,setAToken}=useContext(AdminContext)
+    const {mToken,setMToken}=useContext(MentorContext)
     const navigate=useNavigate()
 
     const logout=()=>{
         navigate('/')
          aToken && setAToken('')
          aToken && localStorage.removeItem('aToken')
+         mToken && setMToken('')
+         mToken && localStorage.removeItem('mToken')
     }
 
 

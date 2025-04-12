@@ -162,6 +162,33 @@ const mentorDashboard = async (req, res) => {
     }
   };
   
+  //API to get mentor progile for Mentor panel
+
+  const mentorProfile=async(req,res)=>{
+    try {
+        const {menId}=req.body
+        const profileData=await mentorModel.findById(menId).select('-password')
+
+        res.json({success:true,profileData})
+    } catch (error) {
+        console.log(error);
+      res.json({ success: false, message: error.message });
+    }
+    
+  }
+
+  //Api to get update mentor profile data from Mentor panel
+
+  const updateMentorProfile=async(req,res)=>{
+    try {
+        const {menId,fees,available,about}=req.body
+        await mentorModel.findByIdAndUpdate(menId,{fees,available,about})
+        res.json({success:true,message:"Profile Updated"})
+    } catch (error) {
+        console.log(error);
+      res.json({ success: false, message: error.message });
+    }
+  }
 
 
-export {changeAvailablity,mentorList,loginMentor,appointmentsMentor,appointmentCancel,appointmentComplete,mentorDashboard}
+export {changeAvailablity,mentorList,loginMentor,appointmentsMentor,appointmentCancel,appointmentComplete,mentorDashboard,mentorProfile,updateMentorProfile}

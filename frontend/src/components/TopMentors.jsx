@@ -35,7 +35,7 @@ const TopMentors = () => {
                   alt={item.name}
                 />
                 <div className="bg-white rounded-b-3xl p-4 text-center">
-                  <p className="font-bold text-green-800">Available</p>
+                  <p className={`font-bold ${item.available ? 'text-green-500':'text-red-500'} `}>{item.available ? 'Available':'Not Available'}</p>
                   <p className="font-bold text-xl md:text-2xl">{item.name}</p>
                   <p className="text-gray-600 text-sm md:text-lg">
                     {item.speciality}

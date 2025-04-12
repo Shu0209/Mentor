@@ -10,6 +10,7 @@ const MentorContextProvider=(props)=>{
  const [mToken,setMToken]=useState(localStorage.getItem('mToken')?localStorage.getItem('mToken'):'')
  const [appointments,setAppointments]=useState([])
  const [dashData,setDashData]=useState(false)
+ const [profileData,setProfileData]=useState(false)
  const getAppointments=async()=>{
     try {
         
@@ -79,8 +80,21 @@ try {
 }
  }
 
+ const getProfileData=async()=>{
+    try {
+        const {data}=await axios.get(backendUrl+'/api/mentor/profile',{headers:{mToken}})
+        if(data.success){
+            setProfileData(data.profileData)
+            console.log(data.profileData)
+        }
+    } catch (error) {
+        console.log(error)
+        toast.error(error.message)
+    }
+ }
+
     const value={
-       mToken,setMToken,backendUrl,appointments,setAppointments,getAppointments,completeAppointment,cancelAppointment,dashData,setDashData,getDashData
+       mToken,setMToken,backendUrl,appointments,setAppointments,getAppointments,completeAppointment,cancelAppointment,dashData,setDashData,getDashData,profileData,setProfileData,getProfileData
     }
     return(
         <MentorContext.Provider value={value}>

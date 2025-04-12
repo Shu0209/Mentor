@@ -60,9 +60,9 @@ useEffect(()=>{
             <td className="px-4 py-3 whitespace-nowrap">₹{item.amount}</td>
             <td className="px-4 py-3 whitespace-nowrap">
               {
-                item.cancelled ?<p className='border-2 border-red-600 text-red-500 rounded-lg p-1 text-center'>
+                (item.cancelled) ?<p className='border-2 border-red-600 text-red-500 rounded-lg p-1 text-center'>
                   Cancelled
-                </p> : <button onClick={()=>cancelAppointment(item._id)} className="bg-red-500 text-white px-6 py-1 rounded hover:bg-red-600 text-xs sm:text-sm">
+                </p> : item.isCompleted ?<p className='border-2 border-green-600 text-green-600 rounded-lg p-1 text-center'>Completed</p> :<button onClick={()=>cancelAppointment(item._id)} className="bg-red-500 text-white px-6 py-1 rounded hover:bg-red-600 text-xs sm:text-sm">
                 Cancel
               </button>
               }
