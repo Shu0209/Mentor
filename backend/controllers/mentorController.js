@@ -75,5 +75,93 @@ const appointmentsMentor=async (req,res)=>{
 }
 
 
+//API to mark appointment completed for mentor panel
 
-export {changeAvailablity,mentorList,loginMentor,appointmentsMentor}
+const appointmentComplete=async(req,res)=>{
+    try {
+const {menId,appointmentId}=req.body
+const appointmentData=await appointmentModel.findById(appointmentId)
+if(appointmentData && appointmentData.menId===menId){
+    await appointmentModel.findByIdAndUpdate(appointmentId,{isCompleted:true})
+    return res.json({success:true,message:'Appointment Completed'})
+}
+else{
+    return res.json({success:false,message:'Marked Failed'})
+}
+
+    } catch (error) {
+        console.log(error)
+        res.json({success:false,message:error.message})
+    }
+}
+
+
+//API to mark appointment cancel for mentor panel
+
+const appointmentCancel=async(req,res)=>{
+    try {
+const {menId,appointmentId}=req.body
+const appointmentData=await appointmentModel.findById(appointmentId)
+if(appointmentData && appointmentData.menId===menId){
+    await appointmentModel.findByIdAndUpdate(appointmentId,{cancelled:true})
+    return res.json({success:true,message:'Appointment Cancelled'})
+}
+else{
+    return res.json({success:false,message:'Cancellation Failed'})
+}
+
+    } catch (error) {
+        console.log(error)
+        res.json({success:false,message:error.message})
+    }
+}
+
+//Api to get dashboard data for mentor panel
+const mentorDashboard = async (req, res) => {
+    try {
+      const { menId } = req.body;
+      const appointments = await appointmentModel.find({ menId });
+  
+      let earnings = 0;
+  
+      // Calculate total earnings
+      appointments.forEach((item) => {
+        if (item.isCompleted || item.payment) {
+          earnings += item.amount;
+        }
+      });
+  
+      // Collect unique student IDs
+      const students = [];
+      appointments.forEach((item) => {
+        if (!students.includes(item.userId.toString())) {
+          students.push(item.userId.toString());
+        }
+      });
+  
+      // Filter and get the latest active appointments
+      const latestAppointments = appointments
+        .filter(item => !item.cancelled && !item.isCompleted)
+        .reverse()
+        .slice(0, 5);
+
+        const totalAppointments=appointments
+        .filter(item => !item.cancelled && !item.isCompleted)
+  
+      const dashData = {
+        earnings,
+        totalAppointments:totalAppointments.length,
+        students: students.length,
+        latestAppointments
+      };
+  
+      res.json({ success: true, dashData });
+    } catch (error) {
+      console.log(error);
+      res.json({ success: false, message: error.message });
+    }
+  };
+  
+
+
+export {changeAvailablity,mentorList,loginMentor,appointmentsMentor,appointmentCancel,appointmentComplete,mentorDashboard}

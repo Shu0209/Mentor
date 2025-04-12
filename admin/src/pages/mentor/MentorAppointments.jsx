@@ -4,7 +4,7 @@ import { AppContext } from '../../context/AppContext'
 import { assets } from '../../assets/assets'
 
 const MentorAppointments = () => {
-  const {mToken,appointments,getAppointments}=useContext(MentorContext)
+  const {mToken,appointments,getAppointments,completeAppointment,cancelAppointment}=useContext(MentorContext)
 
 
   const {calculateAge,slotDateFormat}=useContext(AppContext)
@@ -32,7 +32,7 @@ const MentorAppointments = () => {
 
     {/* Table Body */}
     <div className="min-w-[800px]">
-      {appointments.map((item, index) => (
+      {appointments.reverse().map((item, index) => (
         <div
           key={index}
           className="grid grid-cols-7 gap-4 items-center px-4 py-4 border-b border-gray-100 hover:bg-gray-50 text-sm text-gray-700"
@@ -68,10 +68,18 @@ const MentorAppointments = () => {
           </p>
 
           {/* Action */}
-          <div className="flex">
-            <img src={assets.cancel_icon} alt="" />
-            <img src={assets.tick_icon} alt="" />
+
+          {
+            item.cancelled 
+            ?<p className='font-semibold border-2 border-red-600 text-red-600 text-center rounded-2xl w-fit px-2 py-1'>Cancelled</p>
+            :item.isCompleted
+            ?<p className='font-semibold border-2 border-green-600 text-green-600 text-center rounded-2xl w-fit px-2 py-1'>Completed</p>
+            :<div className="flex">
+            <img onClick={(()=>cancelAppointment(item._id))} src={assets.cancel_icon} alt="" />
+            <img onClick={()=>completeAppointment(item._id)} src={assets.tick_icon} alt="" />
           </div>
+          }
+          
         </div>
       ))}
     </div>
