@@ -3,6 +3,7 @@ import { assets } from '../assets/assets.js'
 import { AdminContext } from '../context/adminContext.jsx'
 import axios from'axios'
 import { toast } from 'react-toastify'
+import { MentorContext } from '../context/MentorContext.jsx'
 
 
 const Login=()=> {
@@ -12,6 +13,8 @@ const Login=()=> {
 
     const {setAToken,backendUrl}=useContext(AdminContext)
     
+     const {setMToken}=useContext(MentorContext)
+
     const onSubmitHandler=async (event)=>{
          event.preventDefault()
 
@@ -29,6 +32,17 @@ const Login=()=> {
             }
           }
           else{
+            const {data}=await axios.post(backendUrl + '/api/mentor/login',{email,password})
+ 
+            if(data.success){
+              localStorage.setItem('mToken',data.token)
+              setMToken(data.token)
+              console.log(data.token)
+              
+            }
+            else{
+              toast.error(data.message)
+            }
 
           }
           
