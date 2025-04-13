@@ -59,6 +59,7 @@ const Navbar = () => {
             </li>
           ))}
         </ul>
+        <img src={assets} alt="" />
       </div>
 
       {/* Right Section */}

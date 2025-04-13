@@ -19,25 +19,28 @@ const Navbar = () => {
 
 
   return (
-    <nav className="bg-white shadow-md py-4 px-6 md:px-12 flex justify-between items-center">
-      {/* Left Side: Logo & Role */}
-      <div className="flex items-center gap-4">
-        <img 
-          src={assets.admin_logo} 
-          alt="Admin Logo" 
-          className="h-12 w-45 object-contain"
-        />
-        <p className="text-xs p-1 w-15 text-center font-semibold text-gray-800 border-2 border-gray-400 rounded-xl">
-          {aToken ? "Admin" : "Mentor"}
-        </p>
-      </div>
+    <nav className="bg-white shadow-md py-3 px-4 sm:py-4 sm:px-6 md:px-8 lg:px-12 flex justify-between items-center">
+  {/* Left Side: Logo & Role */}
+  <div className="flex items-center gap-2 sm:gap-3 md:gap-4">
+    <img 
+      src={assets.admin_logo} 
+      alt="Admin Logo" 
+      className="h-8 w-auto sm:h-10 md:h-12 object-contain"
+    />
+    <p className="text-[10px] xs:text-xs p-1 px-2 text-center font-semibold text-gray-800 border-2 border-gray-400 rounded-xl">
+      {aToken ? "Admin" : "Mentor"}
+    </p>
+  </div>
 
-      {/* Right Side: Logout Button */}
-      <button onClick={logout} className="bg-red-500 text-white px-5 py-2 rounded-lg text-lg font-medium 
-                         hover:bg-red-600 transition duration-300 shadow-md">
-        Logout
-      </button>
-    </nav>
+  {/* Right Side: Logout Button */}
+  <button 
+    onClick={logout} 
+    className="bg-red-500 text-white px-3 py-1 sm:px-4 sm:py-2 md:px-5 rounded-md sm:rounded-lg text-sm sm:text-base md:text-lg font-medium 
+              hover:bg-red-600 transition duration-300 shadow-md"
+  >
+    Logout
+  </button>
+</nav>
   )
 }
 
